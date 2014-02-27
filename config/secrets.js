@@ -1,9 +1,9 @@
 module.exports = {
-  db: 'mongodb://localhost:27017/test',
+  db: 'mongodb://<dbuser>:<dbpassword>@ds033559.mongolab.com:33559/heroku_app22590807',
 
   sessionSecret: "Your Session Secret goes here",
 
-  localAuth: true,
+  localAuth: false,
 
   mailgun: {
     login: 'Your Mailgun SMTP Username',
@@ -29,7 +29,7 @@ module.exports = {
     secret: 'Your API Secret'
   },
 
-  facebookAuth: true,
+  facebookAuth: false,
   facebook: {
     clientID: 'Your App ID',
     clientSecret: 'Your App Secret',
@@ -39,13 +39,13 @@ module.exports = {
 
   githubAuth: true,
   github: {
-    clientID: 'Your Client ID',
-    clientSecret: 'Your Client Secret',
+    clientID: '1ef53bd5267c63c042f3',
+    clientSecret: '511dcc1f1e380fb2a72cd589206aa78f5e9a8137',
     callbackURL: '/auth/github/callback',
     passReqToCallback: true
   },
 
-  twitterAuth: true,
+  twitterAuth: false,
   twitter: {
     consumerKey: 'Your Consumer Key',
     consumerSecret: 'Your Consumer Secret',
@@ -55,8 +55,8 @@ module.exports = {
 
   googleAuth: true,
   google: {
-    clientID: 'Your Client ID',
-    clientSecret: 'Your Client Secret',
+    clientID: '280958140977-um2932bfdv8gobff6vq02fpcu336c9es.apps.googleusercontent.com',
+    clientSecret: '2xOgrw3SGnthOQxUEGBdTpJX',
     callbackURL: '/auth/google/callback',
     passReqToCallback: true
   },
