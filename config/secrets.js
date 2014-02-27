@@ -1,5 +1,5 @@
 module.exports = {
-  db: 'mongodb://<dbuser>:<dbpassword>@ds033559.mongolab.com:33559/heroku_app22590807',
+  db: 'mongodb://heroku_app22590807:se35tla2h2g8dsobndu0lscmhl@ds033559.mongolab.com:33559/heroku_app22590807',
 
   sessionSecret: "Your Session Secret goes here",
 
