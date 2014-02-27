@@ -23,11 +23,24 @@ function initRoomSelect() {
         roomOption.text = room.name;
         roomSelect.appendChild(roomOption);
     }
+<<<<<<< HEAD
+      // Place JavaScript code here...
+  var socket = io.connect(window.location.href);
+  socket.on('greet', function (data) {
+    console.log(data);
+    socket.emit('respond', { message: 'Hello to you too, Mr.Server!' });
+    });
+});
+function setpos(x, y) {
+    right = x + 'px'
+    bottom = y + 'px'
+=======
 }
 
 function setLocation(rightPer, bottomPer) {
     rightStr = rightPer + '%'
     bottomStr = bottomPer + '%'
+>>>>>>> 315c9242370a2a7df45845b7d678c30dc57b2e11
     $('#overlay').css({
          'visibility': 'visible',
          'right': rightStr,
