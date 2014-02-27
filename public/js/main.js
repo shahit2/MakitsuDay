@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var roomSelect = document.getElementById('roomselector');
-    while (roomSelect.hasChildNodes())
-      roomSelect.removeChild(roomSelect.lastChild);
+    //while (roomSelect.hasChildNodes())
+    //  roomSelect.removeChild(roomSelect.lastChild);
     for(var x = 0; x < rooms.length; x ++) {
         var roomOption = document.createElement("option");
         var room = rooms[x];
@@ -11,7 +11,6 @@ $(document).ready(function() {
         roomSelect.appendChild(roomOption);
     }
 });
-
 
 function setpos(x, y) {
     right = x + 'px'
@@ -27,6 +26,7 @@ function findroom() {
     var roomIndex = roomSelect.options[roomSelect.selectedIndex].value;
     var room = rooms[roomIndex];
     $('#overlay').css({
+         'visibility': 'visible',
          'right': room.right,
          'bottom': room.bottom
      });
@@ -63,4 +63,10 @@ rivendell = new room('33%', '66%', 'Rivendell');
 
 openarea = new room('35%', '27%', 'Open Area');
 
-rooms = [ hogwartz, doffice, greyhawk, atlantis, treadmill, boffice, oz, shangrila, elsinore, camelot, rivendell, openarea ]
+kitchen = new room('61%', '28%', 'Kitchen');
+
+corner = new room('4%', '90%', 'Quiet Corner');
+
+bathroom = new room('38%', '42%', "Men's Bathroom");
+
+rooms = [ hogwartz, doffice, greyhawk, atlantis, treadmill, boffice, oz, shangrila, elsinore, camelot, rivendell, openarea, kitchen, corner, bathroom ]
