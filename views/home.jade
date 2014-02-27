@@ -1,8 +1,11 @@
 extends layout
 
 block content
+    #selector
+        | Where's Dave?  
+        select(name="Room" id="roomselector" onchange="findroom()")
+            option(value="default") Select location
     #map
         img(id="floorplan", src="img/floorplan.jpg")
-        img(id="overlay", src="img/dot.gif")
-    #stuff
-        select(name="Room" id="roomselector" onchange="findroom()")
+        img(id="overlay", src="img/red_pulse.gif")
+    
