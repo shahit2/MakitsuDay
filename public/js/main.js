@@ -1,4 +1,17 @@
 $(document).ready(function() {
+    initRoomSelect();
+    
+    $('img').click(function(e) {
+        var offset = $(this).offset();
+        var left = e.pageX - offset.left + 8;
+        var top = e.pageY - offset.top + 8;
+        var rightPer = (1 - (left / $(this).width())) * 100;
+        var bottomPer = (1 - (top /  $(this).height())) * 100;
+        setLocation(rightPer, bottomPer);
+    });
+});
+
+function initRoomSelect() {
     var roomSelect = document.getElementById('roomselector');
     //while (roomSelect.hasChildNodes())
     //  roomSelect.removeChild(roomSelect.lastChild);
@@ -10,18 +23,19 @@ $(document).ready(function() {
         roomOption.text = room.name;
         roomSelect.appendChild(roomOption);
     }
-});
+}
 
-function setpos(x, y) {
-    right = x + 'px'
-    bottom = y + 'px'
+function setLocation(rightPer, bottomPer) {
+    rightStr = rightPer + '%'
+    bottomStr = bottomPer + '%'
     $('#overlay').css({
-         'right': right,
-         'bottom': bottom
+         'visibility': 'visible',
+         'right': rightStr,
+         'bottom': bottomStr
      });
 }
 
-function findroom() {
+function setRoom() {
     var roomSelect = document.getElementById('roomselector');
     var roomIndex = roomSelect.options[roomSelect.selectedIndex].value;
     var room = rooms[roomIndex];
