@@ -1,5 +1,8 @@
 extends layout
 
 block content
-  img(id="floorplan", src="img/floorplan.jpg")
-  img(id="overlay", src="img/dot.gif")
+    #map
+        img(id="floorplan", src="img/floorplan.jpg")
+        img(id="overlay", src="img/dot.gif")
+    #stuff
+        select(name="Room" id="roomselector" onchange="findroom()")
