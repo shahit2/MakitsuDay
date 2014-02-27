@@ -10,8 +10,13 @@ $(document).ready(function() {
         roomOption.text = room.name;
         roomSelect.appendChild(roomOption);
     }
+      // Place JavaScript code here...
+  var socket = io.connect(window.location.href);
+  socket.on('greet', function (data) {
+    console.log(data);
+    socket.emit('respond', { message: 'Hello to you too, Mr.Server!' });
+    });
 });
-
 function setpos(x, y) {
     right = x + 'px'
     bottom = y + 'px'

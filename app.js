@@ -11,6 +11,7 @@ var passport = require('passport');
 var expressValidator = require('express-validator');
 var connectAssets = require('connect-assets');
 
+
 /**
  * Load controllers.
  */
@@ -34,14 +35,24 @@ var passportConf = require('./config/passport');
  */
 
 var app = express();
+var http = require('http');
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 
 /**
  * Mongoose configuration.
  */
 
 mongoose.connect(secrets.db);
+
 mongoose.connection.on('error', function() {
   console.error('✗ MongoDB Connection Error. Please make sure MongoDB is running.');
+});
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+  console.log("We are connected to the db");
 });
 
 /**
@@ -52,8 +63,8 @@ var hour = 3600000;
 var day = (hour * 24);
 var week = (day * 7);
 var month = (day * 30);
-
-app.set('port', process.env.PORT || 3000);
+ 
+app.set('port', process.env.PORT || 8400 );
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(connectAssets({
@@ -132,7 +143,6 @@ app.get('/api/github', passportConf.isAuthenticated, passportConf.isAuthorized, 
 app.get('/api/twitter', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getTwitter);
 app.get('/api/venmo', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getVenmo);
 app.post('/api/venmo', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.postVenmo);
-
 /**
  * OAuth routes for sign-in.
  */
@@ -167,8 +177,20 @@ app.get('/auth/venmo/callback', passport.authorize('venmo', { failureRedirect: '
  * Start Express server.
  */
 
-app.listen(app.get('port'), function() {
+server.listen(app.get('port'), function() {
   console.log("✔ Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
 });
 
-module.exports = app;
+io.configure(function() {
+  io.set('transports', ['websocket']);
+});
+
+io.sockets.on('connection', function(socket) {
+  socket.emit('greet', { hello: 'Hey, Mr.Client!' });
+  socket.on('respond', function(data) {
+    console.log(data);
+  });
+  socket.on('disconnect', function() {
+    console.log('Socket disconnected');
+  });
+});

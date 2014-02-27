@@ -5,7 +5,12 @@ block content
         | Where's Dave?  
         select(name="Room" id="roomselector" onchange="findroom()")
             option(value="default") Select location
+        button(class="btn", data-action="bea" onclick="updateDave()").
+            Update Dave
     #map
         img(id="floorplan", src="img/floorplan.jpg")
         img(id="overlay", src="img/red_pulse.gif")
-    
+script
+    var socket = io.connect('http://localhost/3000')
+      socket.on('connect', function ()
+        socket.send('hi'))
