@@ -11,7 +11,7 @@ $(document).ready(function() {
         var top = e.pageY - offset.top + 8;
         var rightPer = (1 - (left / $(this).width())) * 100;
         var bottomPer = (1 - (top /  $(this).height())) * 100;
-        setLocation(rightPer, bottomPer);
+        setLocation(rightPer + '%', bottomPer + '%');
     });
     var socket = io.connect(window.location.href);
   socket.on('greet', function (data) {
@@ -37,12 +37,10 @@ function initRoomSelect() {
 }
 
 function setLocation(rightPer, bottomPer) {
-    var rightStr = rightPer// + '%'
-    var bottomStr = bottomPer// + '%'
     $('#overlay').css({
          'visibility': 'visible',
-         'right': rightStr,
-         'bottom': bottomStr
+         'right': rightPer,
+         'bottom': bottomPer
      });
 }
 
