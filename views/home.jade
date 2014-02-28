@@ -1,11 +1,14 @@
 extends layout
 
 block content
+    script(src="https://apis.google.com/js/client.js?onload=handleClientLoad")
     #selector
         | Where's Dave?  
         select(name="Room" id="roomselector" onchange="setRoom()")
             option(value="default") Select location
         |      or just click on the floor plan
+    #button
+        input(type="button" id="authorize-button" value="Login" onClick='handleAuthClick')
     #map
         img(id="floorplan", src="img/floorplan.jpg")
         img(id="overlay", src="img/red_pulse.gif")

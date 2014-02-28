@@ -1,5 +1,9 @@
 $(document).ready(function() {
+    //$.getScript("https://apis.google.com/js/client.js", function(){
+    //    console.log("google script loaded");
+    //});
     initRoomSelect();
+    //handleClientLoad();
     
     $('img').click(function(e) {
         var offset = $(this).offset();
@@ -26,8 +30,8 @@ function initRoomSelect() {
 }
 
 function setLocation(rightPer, bottomPer) {
-    rightStr = rightPer + '%'
-    bottomStr = bottomPer + '%'
+    var rightStr = rightPer// + '%'
+    var bottomStr = bottomPer// + '%'
     $('#overlay').css({
          'visibility': 'visible',
          'right': rightStr,
@@ -44,6 +48,40 @@ function setRoom() {
          'right': room.right,
          'bottom': room.bottom
      });
+}
+
+function checkCalendar() {
+    var now = new Date();
+    var min = new Date();
+    min.setHours(1);
+    var max = new Date();
+    max.setHours(23);
+    gapi.client.load('calendar', 'v3', function() {
+        var request = gapi.client.calendar.events.list({
+            'calendarId': 'bsawyer@basistech.com',
+            'singleEvents': true,
+            'timeMin': min.toISOString(),
+            'timeMax': max.toISOString()
+            
+        });
+
+        request.execute(function(resp) {
+            for (var i = 0; i < resp.items.length; i++) {
+                var e = resp.items[i];
+                console.log(e.summary + ' at ' + e.location + ' from ' +e.start.dateTime + ' to ' + e.end.dateTime);
+                var start = new Date(Date.parse(e.start.dateTime));
+                var end = new Date(Date.parse(e.end.dateTime));
+                if (start.getTime() < now.getTime() || end.getTime() > now.getTime()) {
+                    for (var j = 0; j < rooms.length; j++) {
+                        if (e.location == rooms[j].name) {
+                            setLocation(rooms[j].right, rooms[j].bottom);
+                            return;
+                        }
+                    }
+                }
+            }
+        });
+    });
 }
 
 function room(right, bottom, name, id) {
