@@ -1,6 +1,6 @@
 //var clientId = '497841236976.apps.googleusercontent.com';  //jsfiddle
-//var clientId = '497841236976-anj4h1697s94ip6pn0v94iuo9tscmtql.apps.googleusercontent.com';  localhost:3000
-var clientId = '497841236976-dps4hjfgs6r9ntkl5ne3dflhmqgscunt.apps.googleusercontent.com';
+var clientId = '497841236976-anj4h1697s94ip6pn0v94iuo9tscmtql.apps.googleusercontent.com';  localhost:3000
+//var clientId = '497841236976-dps4hjfgs6r9ntkl5ne3dflhmqgscunt.apps.googleusercontent.com';
 var apiKey = 'AIzaSyAlOkP-S6ClEdAjbkAr8gbPFHAqE2DrqPo';
 var scopes = 'https://www.googleapis.com/auth/calendar';
 

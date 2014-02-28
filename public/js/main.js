@@ -36,25 +36,42 @@ function initRoomSelect() {
     }
 }
 
-function setLocation(rightPer, bottomPer) {
-    $('#overlay').css({
+function setLocationRed(rightPer, bottomPer) {
+    $('#overlayRed').css({
          'visibility': 'visible',
          'right': rightPer,
          'bottom': bottomPer
      });
 }
 
-function setRoom() {
+function setRoomRed() {
     var roomSelect = document.getElementById('roomselector');
     var roomIndex = roomSelect.options[roomSelect.selectedIndex].value;
     var room = rooms[roomIndex];
-    $('#overlay').css({
+    $('#overlayRed').css({
          'visibility': 'visible',
          'right': room.right,
          'bottom': room.bottom
      });
 }
+function setLocationBlue(rightPer, bottomPer) {
+    $('#overlayBlue').css({
+         'visibility': 'visible',
+         'right': rightPer,
+         'bottom': bottomPer
+     });
+}
 
+function setRoomBlue() {
+    var roomSelect = document.getElementById('roomselector');
+    var roomIndex = roomSelect.options[roomSelect.selectedIndex].value;
+    var room = rooms[roomIndex];
+    $('#overlayBlue').css({
+         'visibility': 'visible',
+         'right': room.right,
+         'bottom': room.bottom
+     });
+}
 function checkCalendar() {
     var now = new Date();
     var min = new Date();
@@ -79,7 +96,7 @@ function checkCalendar() {
                 if (start.getTime() < now.getTime() || end.getTime() > now.getTime()) {
                     for (var j = 0; j < rooms.length; j++) {
                         if (e.location == rooms[j].name) {
-                            setLocation(rooms[j].right, rooms[j].bottom);
+                            setLocationBlue(rooms[j].right, rooms[j].bottom);
                             return;
                         }
                     }
