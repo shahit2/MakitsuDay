@@ -6,9 +6,15 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='description', content='')
     meta(name='author', content='')
-    title #{title} - Starter Template for Bootstrap
+    title #{title} - FindDave!!!!!!
     != css('styles')
     != js('application')
+    script(src='/socket.io/socket.io.js?v=#{cacheBuster}')
+    script.
+     socket = io.connect(window.location.href)
+     socket.on('greet', function (data) 
+      console.log(data);
+      socket.emit('respond', { message: 'Hello to you too, Mr.Server!' }))
   body
     #wrap
       include partials/navigation

@@ -13,7 +13,14 @@ $(document).ready(function() {
         var bottomPer = (1 - (top /  $(this).height())) * 100;
         setLocation(rightPer, bottomPer);
     });
+    var socket = io.connect(window.location.href);
+  socket.on('greet', function (data) {
+    console.log(data);
+    socket.emit('respond', { message: 'Hello to you too, Mr.Server!' });
+    });
+
 });
+
 
 function initRoomSelect() {
     var roomSelect = document.getElementById('roomselector');
